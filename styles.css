@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/inter-var-latin.woff2") format("woff2");
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-400 ring-offset-2 ring-offset-white;
+  }
+  summary { cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[0.95rem] font-semibold transition-colors duration-150;
+  }
+  .btn-primary { @apply btn bg-navy-900 text-white hover:bg-navy-700; }
+  .btn-accent { @apply btn bg-accent-400 text-navy-950 hover:bg-accent-300; }
+  .btn-ghost { @apply btn border border-line bg-white text-navy-900 hover:border-navy-300 hover:bg-navy-50; }
+  .btn-sm { @apply px-3.5 py-2 text-sm rounded-lg; }
+
+  .link-arrow { @apply inline-flex items-center gap-1 font-semibold text-navy-700 underline decoration-navy-200 underline-offset-4 hover:text-navy-900 hover:decoration-accent-400; }
+
+  .card { @apply rounded-2xl border border-line bg-white shadow-card; }
+  .card-hover { @apply transition-shadow duration-200 hover:shadow-lift; }
+
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.14em] text-accent-700; }
+  .h2 { @apply text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl; }
+  .lead { @apply text-lg leading-relaxed text-ink-soft; }
+
+  .badge { @apply inline-flex items-center rounded-full bg-navy-50 px-2.5 py-0.5 text-xs font-semibold text-navy-700; }
+  .badge-accent { @apply inline-flex items-center rounded-full bg-accent-100 px-2.5 py-0.5 text-xs font-semibold text-accent-800; }
+
+  .note { @apply rounded-xl border border-accent-200 bg-accent-50 px-4 py-3 text-sm leading-relaxed text-ink; }
+  .meta { @apply text-xs text-ink-muted; }
+
+  /* Taulukot */
+  .table-wrap { @apply overflow-x-auto rounded-2xl border border-line bg-white shadow-card; }
+  .table { @apply w-full border-collapse text-left text-sm; }
+  .table thead th { @apply bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wide text-ink-muted; }
+  .table tbody th { @apply border-t border-line px-4 py-3 text-left align-top text-sm font-semibold text-navy-950; }
+  .table td { @apply border-t border-line px-4 py-3 align-top; }
+  .table tbody tr:hover td, .table tbody tr:hover th { @apply bg-navy-50/40; }
+
+  /* Pitkä sisältö */
+  .prose-fi { @apply max-w-prose text-[1.0625rem] leading-[1.75] text-ink; }
+  .prose-fi > * + * { @apply mt-4; }
+  .prose-fi h2 { @apply mt-12 text-2xl font-bold tracking-tight text-navy-950 sm:text-[1.75rem]; }
+  .prose-fi h3 { @apply mt-8 text-xl font-semibold text-navy-900; }
+  .prose-fi h2 + *, .prose-fi h3 + * { @apply mt-3; }
+  .prose-fi ul { @apply list-disc space-y-2 pl-5 marker:text-accent-500; }
+  .prose-fi ol { @apply list-decimal space-y-2 pl-5 marker:font-semibold marker:text-navy-700; }
+  .prose-fi a { @apply font-medium text-navy-700 underline decoration-navy-200 underline-offset-4 hover:decoration-accent-400; }
+  .prose-fi strong { @apply font-semibold text-navy-950; }
+  .prose-fi .table-wrap { @apply my-6; }
+
+  /* FAQ */
+  .faq-item summary { @apply flex items-start justify-between gap-4 px-5 py-4 text-left font-semibold text-navy-950; }
+  .faq-item[open] summary .faq-icon { transform: rotate(45deg); }
+  .faq-body { @apply px-5 pb-5 text-ink-soft leading-relaxed; }
+  .faq-body > * + * { @apply mt-3; }
+  .faq-body a { @apply font-medium text-navy-700 underline decoration-navy-200 underline-offset-4; }
+
+  /* Suodattimet */
+  .filter-chip { @apply relative inline-flex; }
+  .filter-chip input { @apply absolute inset-0 h-full w-full cursor-pointer opacity-0; }
+  .filter-chip span { @apply rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors; }
+  .filter-chip:hover span { @apply border-navy-300; }
+  .filter-chip input:checked + span { @apply border-navy-900 bg-navy-900 text-white; }
+  .filter-chip input:focus-visible + span { @apply ring-2 ring-accent-400 ring-offset-2; }
+}
+
+/* Sticky-header: varjo, kun sivua on vieritetty */
+.site-header { transition: box-shadow .2s ease, background-color .2s ease; }
+.site-header.is-scrolled { box-shadow: 0 1px 0 #e6e8ec, 0 8px 24px -12px rgba(16, 24, 40, .18); background-color: rgba(255, 255, 255, .96); }
+
+.faq-icon { transition: transform .2s ease; }
+[hidden] { display: none !important; }
+
+@media print {
+  .site-header, .site-footer, .no-print { display: none !important; }
+}

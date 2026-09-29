@@ -1,0 +1,20 @@
+{
+  "name": "mikroaaltouuni-fi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "mikroaaltouuni.fi – suomalainen mikroaaltouunien tietosivusto ja vertailu",
+  "type": "module",
+  "scripts": {
+    "build": "tsx build.ts && tailwindcss -c tailwind.config.js -i styles.css -o dist/styles.css --minify",
+    "preview": "serve dist",
+    "dev": "npm run build && serve dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "serve": "^14.2.4",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
